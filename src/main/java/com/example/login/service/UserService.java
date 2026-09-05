@@ -1,0 +1,13 @@
+package com.example.login.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.login.model.entity.SysUserDO;
+import com.example.login.model.vo.LoginTokenVO;
+
+public interface UserService extends IService<SysUserDO> {
+    LoginTokenVO login(String username, String password);
+
+    LoginTokenVO refresh(String oldRefreshToken);
+
+    void logout(String refreshToken);
+}
