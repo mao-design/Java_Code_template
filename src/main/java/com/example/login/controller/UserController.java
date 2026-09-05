@@ -1,12 +1,14 @@
 package com.example.login.controller;
 
 import com.example.login.common.utils.Result;
-import com.example.login.model.dto.UserDTO;
+import com.example.login.model.dto.LoginDTO;
 import com.example.login.model.dto.RefreshDTO;
+import com.example.login.model.dto.RegisterDTO;
 import com.example.login.model.vo.LoginTokenVO;
 import com.example.login.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +30,7 @@ public class UserController {
             description = "账号密码登录，返回双JWT"
     )
     @PostMapping("/login")
-    public Result<LoginTokenVO> login(@RequestBody UserDTO loginDTO) {
+    public Result<LoginTokenVO> login(@RequestBody LoginDTO loginDTO) {
         return Result.success(
                 userService.login(
                         loginDTO.getUsername(),
@@ -55,7 +57,10 @@ public class UserController {
             description = "注册新用户"
     )
     @PostMapping("/register")
-    public Result register() {return null;}
+    public Result register(@Valid @RequestBody RegisterDTO registerDTO) {
+        userService.register(registerDTO);
+        return Result.success("注册成功");
+    }
 
     @Operation(
             summary = "退出登录",

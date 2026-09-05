@@ -1,10 +1,12 @@
 package com.example.login.common.exception;
 
 import com.example.login.common.utils.Result;
+import com.example.login.enums.ErrorCode;
 import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -78,6 +80,21 @@ public class GlobalExceptionHandler {
         log.warn("数据库唯一键冲突：{}", e.getMessage());
         // 生产环境不要直接把 SQL 异常信息返回给前端，需转换成业务友好提示
         return Result.error(DATA_QUERY_ERROR.getCode(), "数据已存在，请勿重复提交");
+    }
+
+    /**
+     * MyBatis执行SQL异常
+     */
+    @ExceptionHandler(MyBatisSystemException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result<Void> handleMyBatisException(
+            MyBatisSystemException e) {
+
+        log.error("MyBatis执行SQL异常", e);
+
+        return Result.error(
+                ErrorCode.DATABASE_ERROR
+        );
     }
 
     /**

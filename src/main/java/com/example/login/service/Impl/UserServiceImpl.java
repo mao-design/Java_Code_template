@@ -1,9 +1,11 @@
 package com.example.login.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.login.common.exception.BusinessException;
 import com.example.login.common.utils.JwtUtil;
 import com.example.login.mapper.SysUserMapper;
+import com.example.login.model.dto.RegisterDTO;
 import com.example.login.model.entity.SysUserDO;
 import com.example.login.model.vo.LoginTokenVO;
 import com.example.login.service.UserService;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.example.login.enums.ErrorCode.LOGIN_EXPIRED;
+import static com.example.login.enums.ErrorCode.*;
 
 // 校验 refreshToken
 
@@ -28,6 +30,8 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO>
     private Integer refrshTiem;
 
     private final JwtUtil jwtUtil;
+
+    private final SysUserMapper sysUserMapper;
 
     private final StringRedisTemplate redisTemplate;
 
@@ -73,7 +77,41 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO>
                 .build();
     }
 
+    @Override
+    public void register(RegisterDTO registerDTO) {
+        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
+            throw new BusinessException(PASSWORD_NOT_SAME.getCode(),
+                    PASSWORD_NOT_SAME.getMessage());
+        }
+
+        // 2. 查询用户名是否已经存在
+        Long count = sysUserMapper.selectCount(
+                new LambdaQueryWrapper<SysUserDO>()
+                        .eq(
+                                SysUserDO::getUsername,
+                                registerDTO.getUsername()
+                        )
+        );
+
+        if (count > 0) {
+            throw new BusinessException(
+                    USER_ALREADY_EXIST.getCode(),
+                    USER_ALREADY_EXIST.getMessage()
+            );
+        }
+
+        SysUserDO user = new SysUserDO();
+        user.setUsername(registerDTO.getUsername());
+        user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        user.setNickname(registerDTO.getNickname());
+        user.setAvatar(registerDTO.getAvatar());
+        user.setPhone(registerDTO.getPhone());
+
+        sysUserMapper.insert(user);
+    }
+
     // 刷新refreshToken
+    @Override
     public LoginTokenVO refresh(String oldRefreshToken) {
 
         try {
@@ -136,6 +174,7 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO>
         }
     }
 
+    @Override
     public void logout(String refreshToken) {
 
         try {

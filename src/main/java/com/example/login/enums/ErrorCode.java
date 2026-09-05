@@ -10,6 +10,9 @@ public enum ErrorCode {
     // ==================== 成功 ====================
     SUCCESS("00000", "成功"),
 
+    // ==================== 用户注册 ====================
+    USER_ALREADY_EXIST("A0111", "用户名已存在"),
+    PASSWORD_NOT_SAME("A0120", "两次输入的密码不一致"),
 
     // ==================== 用户登录认证 ====================
     USER_NOT_EXIST("A0201", "用户不存在"),
@@ -19,7 +22,6 @@ public enum ErrorCode {
     REFRESH_TOKEN_INVALID("A0205", "Refresh Token已失效"),
     TOKEN_INVALID("A0206", "Token非法"),
     TOKEN_EXPIRED("A0207", "Token已过期"),
-
 
     // ==================== 权限 ====================
     NO_PERMISSION("A0301", "没有访问权限"),

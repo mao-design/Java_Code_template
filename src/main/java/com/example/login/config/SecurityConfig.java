@@ -40,6 +40,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/user/auth/login",
                                 "/user/auth/refresh",
+                                "/user/auth/register",
                                 // Knife4j
                                 "/doc.html",
                                 "/webjars/**",
@@ -89,6 +90,7 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // 密码加密
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
