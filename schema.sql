@@ -1,3 +1,4 @@
+# 项目 Sql
 create database secondhand_market;
 
 use secondhand_market;
