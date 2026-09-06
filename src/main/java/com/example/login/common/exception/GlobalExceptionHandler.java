@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining("；"));
         log.warn("参数校验失败：{}", message);
-        return Result.error(PARAM_ERROR.getCode(), message);
+        return Result.error(PARAM_ERROR.getCode(), PARAM_ERROR.getMessage());
     }
 
     /**

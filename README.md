@@ -1,6 +1,7 @@
 ## Java全栈技术模版
 
 技术栈：
+
 前端：Vue3、Vite、Element-Plus、Vue-Router、Pinia、TS、Axios
 
 后端：Java17+、Spring Boot3+、Maven、Lombok、MyBatis-Plus、RabbitMQ、MySQL、Redis、Lua、RESTful API
