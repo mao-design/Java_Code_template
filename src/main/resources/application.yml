@@ -62,6 +62,7 @@ logging:
   level:
     com.example.market: info
 
+# API文档
 knife4j:
   enable: true
 
