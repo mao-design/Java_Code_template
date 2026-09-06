@@ -3,6 +3,5 @@
 /frontend/dist/
 /uploads/
 /.idea/
-*.iml
 .DS_Store
 *.log
