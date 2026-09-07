@@ -7,10 +7,10 @@
         ref="formRef"
         :model="form"
         :rules="rules"
-        lable-position="top"
+        label-position="top"
         @keyup.enter="handleLogin"
       >
-        <el-form-item lable="用户名" prop="username">
+        <el-form-item label="用户名" prop="username">
           <el-input
             v-model="form.username"
             placeholder="请输入用户名"
@@ -18,7 +18,7 @@
           />
         </el-form-item>
 
-        <el-from-item lable="密码" prop="password">
+        <el-form-item lable="密码" prop="password">
           <el-input
             v-model="form.password"
             type="password"
@@ -26,7 +26,7 @@
             show-password
             autocomplete="current-password"
           />
-        </el-from-item>
+        </el-form-item>
         <br /><br />
         <el-button
           type="primary"

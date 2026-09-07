@@ -107,8 +107,25 @@ const rules: FormRules<RegisterForm> = {
 
   confirmPassword: [
     {
+      // 表示必填
       required: true,
+      // 错误信息
       message: "请再次输入密码",
+      // 失焦会显示错误信息
+      trigger: "blur",
+    },
+    {
+      // _rule参数之所以这些写是因为validator传参是这么要求的，但没有使用，所以就这么写
+      // value 表示当前 confirmPassword
+      // 校验函数
+      validator: (_rule, value, callback) => {
+        if (value !== form.password) {
+          callback(new Error("两次输入的密码不一致"));
+          return;
+        }
+
+        callback();
+      },
       trigger: "blur",
     },
   ],

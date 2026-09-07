@@ -187,7 +187,10 @@ public class UserServiceImpl extends ServiceImpl<SysUserMapper, SysUserDO>
                     "refresh:" + userId + ":" + jti
             );
         } catch (Exception e) {
-
+            throw new BusinessException(
+                    REFRESH_TOKEN_INVALID.getCode(),
+                    REFRESH_TOKEN_INVALID.getMessage()
+            );
         }
     }
 }

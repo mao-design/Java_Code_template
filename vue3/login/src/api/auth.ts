@@ -12,7 +12,7 @@ export interface RegisterParams {
   username: string;
   password: string;
   confirmPassword: string;
-  nickName?: string;
+  nickname?: string;
   phone?: string;
   avatar?: string;
 }
@@ -29,7 +29,8 @@ export interface LoginToken {
 }
 
 // 注册函数
-export function registerApi(data: RefreshParams) {
+export function registerApi(data: RegisterParams) {
+  // 往 /user/auth/register 发送 data 数据
   return request.post<ApiResponse<object>>("/user/auth/register", data);
 }
 

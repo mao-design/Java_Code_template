@@ -4,7 +4,7 @@ import { useUserStore } from "@/stores/user";
 
 const router = createRouter({
   history: createWebHistory(),
-
+  // 路由表
   routes: [
     {
       path: "/login",
@@ -23,14 +23,20 @@ const router = createRouter({
   ],
 });
 
+// 守卫路由，
 router.beforeEach((to) => {
   const userStore = useUserStore();
 
   const publicPaths = ["/login", "/register"];
 
+  // includes() 判断数组里面有没有这个值
+  // 例如：
+  // ["a","b"].includes("a")
+  // 返回 true
   const isPublic = publicPaths.includes(to.path);
 
   // 没登录不能访问系统
+  // 未登录和访问页不是公开的
   if (!userStore.isLoggedIn && !isPublic) {
     return "/login";
   }
