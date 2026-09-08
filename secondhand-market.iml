@@ -6,6 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/com/example/login/login/.vscode" />
       <excludeFolder url="file://$MODULE_DIR$/template" />
       <excludeFolder url="file://$MODULE_DIR$/vue3" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/com/example/login" />
     </content>
   </component>
 </module>
