@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
-    <file url="file://$PROJECT_DIR$/Login/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/API_Rate_Limiting/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/frontend/dist" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/shopping-file/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/shopping-payment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/shopping-search/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/shopping-user/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/shopping-user/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Shopping/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Shopping/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
   </component>
 </project>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/API_Rate_Limiting/sql/login.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Shopping/sql/shopping-product/product_category.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Shopping/sql/shopping-product学习代码.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/Shopping/sql/shopping_sql代码学习.sql" dialect="MySQL" />
+  </component>
+</project>

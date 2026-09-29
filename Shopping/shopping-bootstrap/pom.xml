@@ -1,0 +1,104 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.example</groupId>
+        <artifactId>shopping</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>shopping-bootstrap</artifactId>
+    <packaging>jar</packaging>
+
+    <name>shopping-bootstrap</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+        <!-- 商品模块 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-product</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 库存模块 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-inventory</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 订单模块 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-order</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- 支付模块 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-payment</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-search</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-promotion</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-file</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-user</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shopping-admin</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+                只有最终启动模块需要打 Spring Boot 可执行 jar。
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

@@ -2,19 +2,46 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="secondhand-market" />
-        <module name="secondhand-market (1)" />
+        <module name="shopping" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Login" target="17" />
+      <module name="Shopping" target="1.5" />
+      <module name="shopping-admin" target="17" />
+      <module name="shopping-bootstrap" target="17" />
+      <module name="shopping-common" target="17" />
+      <module name="shopping-file" target="17" />
+      <module name="shopping-inventory" target="17" />
+      <module name="shopping-order" target="17" />
+      <module name="shopping-payment" target="17" />
+      <module name="shopping-product" target="17" />
+      <module name="shopping-promotion" target="17" />
+      <module name="shopping-search" target="17" />
+      <module name="shopping-user" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="secondhand-market" options="-parameters" />
-      <module name="secondhand-market (1)" options="-parameters" />
+      <module name="Login" options="-parameters" />
+      <module name="Shopping" options="" />
+      <module name="shopping" options="-parameters" />
+      <module name="shopping-admin" options="-parameters" />
+      <module name="shopping-bootstrap" options="-parameters" />
+      <module name="shopping-common" options="-parameters" />
+      <module name="shopping-file" options="-parameters" />
+      <module name="shopping-inventory" options="-parameters" />
+      <module name="shopping-order" options="-parameters" />
+      <module name="shopping-payment" options="-parameters" />
+      <module name="shopping-product" options="-parameters" />
+      <module name="shopping-promotion" options="-parameters" />
+      <module name="shopping-search" options="-parameters" />
+      <module name="shopping-user" options="-parameters" />
     </option>
   </component>
 </project>

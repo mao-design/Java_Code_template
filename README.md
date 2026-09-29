@@ -11,3 +11,5 @@
 ## 更新
 
 2026-9-5：更新Login模块，实现 双JWT（AccessToken、RefreshToken）,详细可查看 [JWT_Login.md](docs/JWT_Login.md)
+
+2026-9-29：更新滑动窗口限流模块，实现接口限流
