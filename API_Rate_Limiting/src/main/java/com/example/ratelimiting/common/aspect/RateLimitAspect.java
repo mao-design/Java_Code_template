@@ -32,10 +32,14 @@ public class RateLimitAspect {
 
     private final RateLimitKeyResolver rateLimitKeyResolver;
 
+    // 匹配所有标注了该注解的方法
     @Around( "@annotation(com.example.ratelimiting.annotation.RateLimit)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+        // 作用：找到是那个方法调用了注解
         Method method = resolveMethod(joinPoint);
 
+        // 从刚才找到的 method 上获取 @RateLimit 注解对象
+        // 注解中赋的值也会一并提取出来
         RateLimit rateLimit =
                 AnnotatedElementUtils.findMergedAnnotation(
                         method,
@@ -46,10 +50,15 @@ public class RateLimitAspect {
             return joinPoint.proceed();
         }
 
+        // 判断传入值是否合规
         validate(rateLimit);
 
+        // TimeUnit timeUnit() 时间单位
+        // rateLimit.window() 时间值
+        // 1分钟 == 60000 ms
         long windowMillis =
                 rateLimit.timeUnit()
+                        // 统一转换成毫秒
                         .toMillis(
                                 rateLimit.window()
                         );
@@ -57,6 +66,13 @@ public class RateLimitAspect {
         String key = rateLimitKeyResolver.resolve(
                 rateLimit,
                 method,
+               /*
+                * 传值 test(10001L, "order");
+                * 那么
+                *   args[0] = 10001L;
+                    args[1] = "order";
+                * getArgs就是获取传入的参数的
+                * */
                 joinPoint.getArgs()
         );
 

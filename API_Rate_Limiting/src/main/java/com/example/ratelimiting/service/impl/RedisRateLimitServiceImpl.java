@@ -47,8 +47,11 @@ public class RedisRateLimitServiceImpl implements RedisRateLimitService {
             }
 
             long allowed = parseLong(result.get(0));
+            // 当前计数
             long currentCount = parseLong(result.get(1));
+            // 重试
             long retryAfterMillis = parseLong(result.get(2));
+
             long serverTimestampMillis = parseLong(result.get(3));
             long remaining = Math.max(
                     maxRequests - currentCount,
