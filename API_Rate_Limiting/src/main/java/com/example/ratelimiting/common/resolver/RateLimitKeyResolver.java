@@ -43,7 +43,7 @@ public class RateLimitKeyResolver {
             Method method,
             Object[] args
     ) {
-        //
+        // 解析资源名称
         String resourceName = resolveResourceName(
                 rateLimit,
                 method
@@ -62,15 +62,21 @@ public class RateLimitKeyResolver {
         // 转换成 hash
         String identityHash = HashUtils.sha256(identity);
 
+        // 返回类似：
+        // app:rate-limit:
+        // com.example.controller.UserController.test_java.lang.Long_java.lang.String_:
+        // ip:
+        // identity的哈希值
         return properties.getKeyPrefix()
                 + ":"
                 + resourceName
                 + ":"
-                + rateLimit.keyType().name().toLowerCase() // 速率限制密钥类型名称（小写）
+                + rateLimit.keyType().name().toLowerCase() // 速率限制密钥类型名称（global 、 ip 、 spel）
                 + ":"
                 + identityHash; // identity 哈希值
     }
 
+    // 解析资源名称
     private String resolveResourceName(
             RateLimit rateLimit,
             Method method
@@ -81,11 +87,28 @@ public class RateLimitKeyResolver {
 
         StringBuilder builder = new StringBuilder();
 
+        // 完整类名 + "." + 方法名
+        // method.getDeclaringClass()：com.example.controller.UserController
+        // method.getName()：test
+        // 得：com.example.controller.UserController.test
         builder.append(method.getDeclaringClass().getName())
                 .append(".")
                 .append(method.getName());
 
-        // TODO 疑惑
+        // 获取这个方法所有参数的“类型”
+        /*
+        *   public void test(
+                    Long userId,
+                    String businessType
+            ) {
+            }
+
+        * 获得：
+        *   [
+                Long.class,
+                String.class
+            ]
+        * */
         Class<?>[] parameterTypers =
                 method.getParameterTypes();
 
@@ -101,6 +124,8 @@ public class RateLimitKeyResolver {
 
         builder.append(")");
 
+        // 返回类似值：
+        // com.example.controller.UserController.test(java.lang.Long,java.lang.String)
         return normalize(
                 builder.toString()
         );
@@ -255,6 +280,7 @@ public class RateLimitKeyResolver {
     }
 
     private String normalize(String value) {
+        // 替换
         return value.replaceAll(
                 "[^a-zA-Z0-9:_\\-.]",
                 "_"

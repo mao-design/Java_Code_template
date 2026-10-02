@@ -79,6 +79,7 @@ public class RateLimitAspect {
         RateLimitResult result;
 
         try {
+            // 判断当前请求是否频繁请求
             result = redisRateLimitService.tryAcquire(
                     key,
                     rateLimit.maxRequests(),
@@ -92,12 +93,15 @@ public class RateLimitAspect {
             throw e;
         }
 
+        // 写入请求头
+        // 将该请求的 允许多少、还剩多少、还有多久 写入请求头中
         writeAllowedHeaders(
                 rateLimit,
                 windowMillis,
                 result
         );
 
+        // 判断当前请求是否允许
         if (!result.allowed()) {
             throw new RateLimitException(
                     rateLimit.message(),
@@ -106,6 +110,7 @@ public class RateLimitAspect {
             );
         }
 
+        // 放行该请求
         return joinPoint.proceed();
     }
 
@@ -113,7 +118,7 @@ public class RateLimitAspect {
 
 
 
-
+    // 作用：找到是那个方法调用了注解
     private Method resolveMethod(ProceedingJoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 
@@ -128,6 +133,7 @@ public class RateLimitAspect {
                 .findBridgedMethod(specificMethod);
     }
 
+    // 判断传入值是否合规
     private void validate(RateLimit rateLimit) {
         if (rateLimit.maxRequests() <= 0) {
             throw new IllegalArgumentException(
@@ -148,18 +154,21 @@ public class RateLimitAspect {
         }
     }
 
-
+    // 写入请求头
     private void writeAllowedHeaders(
             RateLimit rateLimit,
             long windowMillis,
             RateLimitResult result
     ) {
+        // 获取当前 HTTP 请求对应的响应对象 HttpServletResponse
         HttpServletResponse response = currentResponse();
 
         if (response == null) {
             return;
         }
 
+        // 写入请求头
+        // 当前限流窗口最多允许多少次请求
         response.setHeader(
                 "X-RateLimit-Limit",
                 String.valueOf(
@@ -167,6 +176,7 @@ public class RateLimitAspect {
                 )
         );
 
+        // 当前窗口还剩多少次请求额度
         response.setHeader(
                 "X-RateLimit-Remaining",
                 String.valueOf(
@@ -174,6 +184,7 @@ public class RateLimitAspect {
                 )
         );
 
+        // 当前限流窗口有多长，单位毫秒
         response.setHeader(
                 "X-RateLimit-Window-Millis",
                 String.valueOf(
@@ -182,12 +193,14 @@ public class RateLimitAspect {
         );
     }
 
+    // 获取当前 HTTP 请求对应的响应对象 HttpServletResponse
     private HttpServletResponse currentResponse() {
         if (RequestContextHolder.getRequestAttributes()
                 instanceof ServletRequestAttributes attributes) {
             return attributes.getResponse();
         }
 
+        // 没有 HTTP 请求则返回 null
         return null;
     }
 
