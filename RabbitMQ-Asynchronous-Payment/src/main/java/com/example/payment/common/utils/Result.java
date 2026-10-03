@@ -1,11 +1,11 @@
 package com.example.payment.common.utils;
 
-import com.example.login.enums.ErrorCode;
+import com.example.payment.enums.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static com.example.login.enums.ErrorCode.*;
+import static com.example.payment.enums.ErrorCode.*;
 
 @Data
 @NoArgsConstructor

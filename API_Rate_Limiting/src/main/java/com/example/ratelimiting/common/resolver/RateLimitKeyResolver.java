@@ -54,7 +54,9 @@ public class RateLimitKeyResolver {
             case IP -> resolveIp(); // 返回 ip
             case SPEL -> resolveSpel( // 返回 value 值
                     rateLimit.key(),
+                    // 参数名
                     method,
+                    // 参数值
                     args
             );
         };

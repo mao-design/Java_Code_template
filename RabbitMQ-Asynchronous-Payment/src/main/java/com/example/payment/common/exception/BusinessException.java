@@ -2,7 +2,7 @@ package com.example.payment.common.exception;
 
 import lombok.Getter;
 
-import static com.example.login.enums.ErrorCode.*;
+import static com.example.payment.enums.ErrorCode.*;
 
 @Getter
 public class BusinessException extends RuntimeException {

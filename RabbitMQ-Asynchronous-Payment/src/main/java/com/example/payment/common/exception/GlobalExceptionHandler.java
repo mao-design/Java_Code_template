@@ -1,8 +1,7 @@
 package com.example.payment.common.exception;
 
-import com.example.login.common.exception.BusinessException;
-import com.example.login.common.utils.Result;
-import com.example.login.enums.ErrorCode;
+import com.example.payment.common.utils.Result;
+import com.example.payment.enums.ErrorCode;
 import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.stream.Collectors;
 
-import static com.example.login.enums.ErrorCode.*;
+import static com.example.payment.enums.ErrorCode.*;
 
 @Slf4j
 @RestControllerAdvice
@@ -27,7 +26,7 @@ public class GlobalExceptionHandler {
     /**
      * 1. 处理自定义业务异常（优先拦截）
      */
-    @ExceptionHandler(com.example.login.common.exception.BusinessException.class)
+    @ExceptionHandler(com.example.payment.common.exception.BusinessException.class)
     public Result<Void> handleBusinessException(BusinessException e) {
         // 记录告警日志（WARN 级别）
         log.warn("业务异常：code={}, message={}", e.getCode(), e.getMessage());

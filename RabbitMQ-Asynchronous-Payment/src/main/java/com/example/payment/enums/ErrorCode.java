@@ -1,4 +1,4 @@
-package com.example.payment.productManagement.productListing.enums;
+package com.example.payment.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

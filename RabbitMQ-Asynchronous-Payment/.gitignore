@@ -1,0 +1,10 @@
+/target/
+/frontend/node_modules/
+/frontend/dist/
+/uploads/
+/.idea/
+.DS_Store
+*.log
+node_modules
+.vscode
+*.zip

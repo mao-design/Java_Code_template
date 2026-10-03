@@ -46,6 +46,7 @@ public class RateLimitAspect {
                         RateLimit.class
                 );
 
+        // 没有设置AOP的接口直接放行
         if (rateLimit == null) {
             return joinPoint.proceed();
         }
@@ -93,8 +94,9 @@ public class RateLimitAspect {
             throw e;
         }
 
-        // 写入请求头
-        // 将该请求的 允许多少、还剩多少、还有多久 写入请求头中
+        // 写入响应头 Response Header
+        // 将该请求的 允许多少、还剩多少、还有多久 写入响应头 Response Header 中
+        // 作用告诉客户端 “限额是多少、还剩多少、窗口多长”。
         writeAllowedHeaders(
                 rateLimit,
                 windowMillis,
@@ -154,7 +156,7 @@ public class RateLimitAspect {
         }
     }
 
-    // 写入请求头
+    // 写入响应头 Response Header
     private void writeAllowedHeaders(
             RateLimit rateLimit,
             long windowMillis,

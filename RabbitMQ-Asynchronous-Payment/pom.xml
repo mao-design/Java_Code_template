@@ -9,9 +9,9 @@
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>Login</artifactId>
+    <artifactId>RabbitMQ-Asynchronous-Payment</artifactId>
     <version>1.0.0</version>
-    <name>Login模版</name>
+    <name>购物模版</name>
     <description>Vue 3 + Spring Boot 3</description>
     <properties>
         <java.version>17</java.version>
